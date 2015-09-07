@@ -1,5 +1,5 @@
 #Network1
-A simple starter repo for new projects. Uses a variety of tools including:
+Getting started. Using a variety of tools including:
 
 * React
 * Browserify
