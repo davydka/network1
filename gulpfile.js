@@ -54,7 +54,18 @@ var bundler = watchify(browserify({
 }));
 
 function bundle() {
-	console.log('bundling...');
+	var date = new Date();
+	var hour = date.getHours();
+	hour = (hour > 12 ? -12 : 0) + hour;
+	hour = (hour < 10 ? "0" : "") + hour;
+
+	var min  = date.getMinutes();
+	min = (min < 10 ? "0" : "") + min;
+
+	var sec  = date.getSeconds();
+	sec = (sec < 10 ? "0" : "") + sec;
+	console.log('bundling...'+hour+':'+min+':'+sec);
+
 	return bundler
 		.bundle()
 		.on('error', function (e) {
