@@ -14,7 +14,7 @@ var element = React.createElement(Hello, {});
 React.render(element, document.querySelector('.container'));
 
 /*
-
+content
 layout data
 transition data
 
@@ -37,7 +37,6 @@ Street
 
 Sets and Items
 	they both are sequential
-	a set has a duration
 	an item contains layout data and position data
 	items within the set transition from one to the next over the course of the set's duration
 	after all the items are complete and the end of the transition is reached, the next set begins
@@ -83,6 +82,7 @@ pillar3
 
 // H***** Window Experience JSON Structure
 
+
 var data = {
 	startTime: '2015-09-07T02:00:00-04:00', //ISO 8601 - 4pm
 	endTime:   '2015-09-07T21:00:00-04:00', //ISO 8601 - 9pm
@@ -106,9 +106,9 @@ var data = {
 								y: [0, -200]  //pull item up over the duration of the item
 							},
 							zoom: [1, 1.5, 1.25, 1.5, 1.65], //item will tween over these values over the course of its duration
-							polygon: {
-								coordinates: '60,20 100,40 100,80 60,100 20,80 20,40', //the x and y coordinates for each corner of the polygon, https://mdn.mozillademos.org/files/3259/polygon.svg
-							},
+								polygon: {
+									coordinates: '60,20 100,40 100,80 60,100 20,80 20,40', //the x and y coordinates for each corner of the polygon, https://mdn.mozillademos.org/files/3259/polygon.svg
+								},
 							type: 'livestream',
 							asset: 'url.external.stream',
 							assetCredit: 'credit',

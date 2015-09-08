@@ -4,21 +4,9 @@ var gutil = require('gulp-util');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var watchify = require('watchify');
-var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var nodemon = require('gulp-nodemon');
-
-//var exec = require('gulp-exec');
-
-function handleErrors() {
-	var args = Array.prototype.slice.call(arguments);
-	notify.onError({
-		title: 'Compile Error',
-		message: '<%= error.message %>'
-	}).apply(this, args);
-	this.emit('end'); // Keep gulp from hanging on this task
-}
 
 gulp.task('sass', function() {
 	gulp.src('./styles/src/*.{scss,sass}')
@@ -27,6 +15,11 @@ gulp.task('sass', function() {
 		.pipe(sass({
 			errLogToConsole: true
 		}))
+		.on('error', function (e) {
+			gutil.log('Sass error');
+			gutil.log(e.message);
+			this.emit('end');
+		})
 		// Writes sourcemaps into the CSS file
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('./styles'));
@@ -41,9 +34,9 @@ gulp.task('watch', function() {
 
 gulp.task('serve', function() {
 	nodemon({
+		ignore: ['gulpfile.js', 'js/'],
 		script: 'server.js',
-		ext: 'js html css',
-		env: { 'NODE_ENV': 'development', 'PORT': 8000 }
+		env: { 'NODE_ENV': 'development', 'PORT': 3000 }
 	})
 	.on('restart', function () {
 		console.log('restarted!')
@@ -61,9 +54,14 @@ var bundler = watchify(browserify({
 }));
 
 function bundle() {
+	console.log('bundling...');
 	return bundler
 		.bundle()
-		.on('error', notify)
+		.on('error', function (e) {
+			gutil.log('Browserify error');
+			gutil.log(e.message);
+			this.emit('end');
+		})
 		.pipe(source('js/app.js'))
 		.pipe(gulp.dest('./'))
 }
