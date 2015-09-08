@@ -10,11 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "browserify": "^11.0.1",
+    "express": "^4.13.3",
     "firebase": "^2.2.9",
     "gulp": "^3.9.0",
+    "gulp-nodemon": "^2.0.4",
     "gulp-notify": "^2.2.0",
     "gulp-sass": "^2.0.4",
-    "gulp-server-livereload": "^1.4.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.6",
     "react": "^0.13.3",

@@ -7,7 +7,9 @@ var watchify = require('watchify');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
-var server = require('gulp-server-livereload');
+var nodemon = require('gulp-nodemon');
+
+//var exec = require('gulp-exec');
 
 function handleErrors() {
 	var args = Array.prototype.slice.call(arguments);
@@ -34,25 +36,18 @@ gulp.task('watch', function() {
 	gulp.watch('./styles/src/*.{scss,sass}', ['sass'])
 });
 
+
+//TODO: get this running on port 80 for socket.io performance
+
 gulp.task('serve', function() {
-	gulp.src('')
-		.pipe(server({
-			//directoryListing: true,
-			livereload: {
-				enabled: true,
-				filter: function(filePath, cb) {
-					if(/js\/app.js/.test(filePath)) {
-						cb(true)
-					} else if(/styles\/main.css/.test(filePath)){
-						cb(true)
-					} else if(/index.html/.test(filePath)){
-						cb(true)
-					}
-				}
-			},
-			defaultFile: 'index.html',
-			open: true
-		}));
+	nodemon({
+		script: 'server.js',
+		ext: 'js html css',
+		env: { 'NODE_ENV': 'development', 'PORT': 8000 }
+	})
+	.on('restart', function () {
+		console.log('restarted!')
+	});
 });
 
 var bundler = watchify(browserify({
@@ -75,7 +70,7 @@ function bundle() {
 bundler.on('update', bundle)
 
 gulp.task('build', function() {
-	bundle()
+	bundle();
 });
 
 gulp.task('default', ['build', 'sass', 'watch', 'serve']);
