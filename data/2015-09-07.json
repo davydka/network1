@@ -1,0 +1,150 @@
+{
+	"data": {
+		"facing": "north",
+		"id": "1",
+		"pillars": [
+			{
+				"data": [
+					{
+						"cards": [
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							}
+						],
+						"daypart": "2",
+						"id": "abc"
+					},
+					{
+						"cards": [
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							}
+						],
+						"daypart": "1",
+						"id": "mno"
+					}
+				],
+				"id": "pillar1"
+			},
+			{
+				"data": [
+					{
+						"cards": [
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							}
+						],
+						"daypart": "1",
+						"id": "def"
+					},
+					{
+						"cards": [
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							}
+						],
+						"daypart": "2",
+						"id": "pqr"
+					}
+				],
+				"id": "pillar2"
+			},
+			{
+				"data": [
+					{
+						"cards": [
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							}
+						],
+						"daypart": "1",
+						"id": "ghi"
+					},
+					{
+						"cards": [
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							},
+							{
+								"id": "string",
+								"type": "string"
+							}
+						],
+						"daypart": "2",
+						"id": "jkl"
+					}
+				],
+				"id": "pillar3"
+			}
+		]
+	},
+	"day": "2015-09-07",
+	"dayparts": [
+		{
+			"finish": "16:00:00",
+			"id": "1",
+			"start": "11:00:00"
+		},
+		{
+			"finish": "21:00:00",
+			"id": "2",
+			"start": "16:00:00"
+		}
+	],
+	"id": "1",
+	"settings": {
+		"logo": "/assets/svg/logo-old.svg",
+		"mirrored": "true",
+		"theme": "last holiday"
+	}
+}
