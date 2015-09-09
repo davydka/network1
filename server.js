@@ -1,32 +1,41 @@
-var express = require('express');
-var http = require('http');
 var _ = require('lodash');
-var path = require('path');
 var fs = require('fs');
+var fetch = require('node-fetch');
+var date = require('datejs');
+var webServer = require('./utils/web-server');
+var socketServer = require('./utils/socket-server')(webServer);
 
 
-
-// Start Express
-var app = express();
-var server = http.createServer(app);
-
-app.use(express.static(__dirname));
-
-server.listen(process.env.PORT || 3000);
-
-//debugging port 80, for socket.io performance
-//console.log(process.env.PORT);
-
-server.on('listening', function() {
-	console.log('Express server started at http://localhost%s', server.address().port == 80 ? '' : ':'+server.address().port);
-});
 
 
 
 // Get last local data-store
-var localDataRoot = './data/';
-var files = fs.readdirSync(localDataRoot);
+var localJsonDir = './data/';
+var files = fs.readdirSync(localJsonDir);
 
-var latestFileName = _.last(files);
-var data = require(localDataRoot + latestFileName);
-console.log('latest locally stored data id is:', data.id);
+var latestJsonFileName = _.last(files);
+var currentJson = require(localJsonDir + latestJsonFileName);
+console.log('latest locally stored data id is:', currentJson.id);
+
+// Fetch latest data from server
+var remoteDataUrl = 'https://h-network.firebaseio.com/data.json';
+fetch(remoteDataUrl)
+	.then(function(response) {
+		return response.json()
+	}).then(function(json) {
+		handleNewJson(json);
+	}).catch(function(ex) {
+		console.log('parsing failed', ex);
+	});
+
+function handleNewJson(newJson){
+	if(newJson.id != currentJson.id){
+		var newDateString = Date.parse(newJson.day).toString('yyyy-MM-dd'); //format date string, https://xkcd.com/1179/
+		var newFileName = newDateString+'.json';
+
+		//fs.writeFile(localJsonDir + newFileName, JSON.stringify(newJson), function (err) {
+		//	if (err) throw err;
+		//	console.log('It\'s saved!');
+		//});
+	}
+}
